@@ -1,0 +1,16 @@
+.Landing {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  margin-bottom: 30px;
+
+  background-image: url("../../../assets/img/bg.jpg");
+
+  &__Welcome {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+}
