@@ -1,19 +1,25 @@
-import { combineReducers } from 'redux';
-import { persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
-import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
+import { ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
+import { localStorageSync } from 'ngrx-store-localstorage';
+import { environment } from 'src/environments/environment';
 
 import booksReducer from './bookSlice';
+import { storageMetaReducer } from './metareducer';
 
-export const reducers: any = combineReducers({
+export const reducers: ActionReducerMap<any> = {
   books: booksReducer,
-});
+};
 
-export const persistedReducer = persistReducer(
-  {
-    key: 'root',
-    storage,
-    stateReconciler: hardSet,
-  },
-  reducers
-);
+
+// export function localStorageSyncReducer(
+//   reducer: ActionReducer<any>
+// ): ActionReducer<any> {
+//   return localStorageSync({ keys: ['books', 'formattedBooks'] })(reducer);
+// }
+// export const metaReducers: Array<MetaReducer<any, any>> = [
+//   localStorageSyncReducer,
+// ];
+
+
+export const metaReducers: MetaReducer<any>[] = !environment.production
+  ? [storageMetaReducer]
+  : [storageMetaReducer];

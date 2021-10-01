@@ -1,5 +1,26 @@
 .Main {
   &__Table {
-    width: 100%;
+    padding-top: 6em;
+
+    table {
+      width: 100%;
+    }
+
+    &_ItemName {
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      color: blue;
+    }
+  }
+
+  &__Search {
+    margin-left: 16px;
+    width: 25%;
+
+    .mat-form-field {
+      width: 100%;
+    }
   }
 }

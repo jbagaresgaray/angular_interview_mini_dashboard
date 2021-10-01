@@ -1,4 +1,10 @@
 .App_Header {
+  .mat-toolbar {
+    position: fixed;
+    z-index: 100;
+    width: 100% !important;
+  }
+
   .spacer {
     flex: 1 1 auto;
   }

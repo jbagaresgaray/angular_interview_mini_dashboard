@@ -1,37 +1,42 @@
-import {
-  createSlice,
-  createSelector,
-  createAsyncThunk,
-} from '@reduxjs/toolkit';
-import { BaseService } from '../services/base.service';
+import { createFeatureSelector } from '@ngrx/store';
+import { createSlice, createSelector } from '@reduxjs/toolkit';
 
-const fetchBooks = (apiService: BaseService) => {
-  return createAsyncThunk('books/fetchBooks', async () => {
-    const response = await apiService.getJSON();
-    return response.data;
-  });
-};
+export interface FormattedBooks {
+  id: string;
+  name: string;
+  image: string;
+  type: string;
+  created_at: string;
+  link: string;
+}
 
 const initialState = {
   books: [],
+  formattedBooks: [],
   count: 0,
 };
 
-const { reducer, actions } = createSlice({
+const { reducer, actions, name } = createSlice({
   name: 'books',
   initialState,
   reducers: {
-    increment: (state) => {
-      state.count++;
+    populateBooks: (state, { payload }) => {
+      state.books = payload;
+    },
+    populateFormattedBooks: (state, { payload }) => {
+      state.formattedBooks = payload;
     },
   },
 });
-const { increment } = actions;
-const selectRoot = (state: any) => state.book;
+
+const { populateBooks, populateFormattedBooks } = actions;
+const selectFeature = createFeatureSelector<ReturnType<typeof reducer>>(name);
+
 export const booksSelectors = {
-  books: createSelector(selectRoot, (state) => state.books),
+  books: createSelector(selectFeature, (state) => state.books),
+  formattedBooks: createSelector(selectFeature, (state) => state.formattedBooks),
 };
 
-export { increment, fetchBooks };
+export { populateBooks, populateFormattedBooks };
 
 export default reducer;

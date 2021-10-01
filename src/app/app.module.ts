@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { persistedReducer } from './stores/reducer';
+import { reducers, metaReducers } from './stores/reducer';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,7 +17,7 @@ import { persistedReducer } from './stores/reducer';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    StoreModule.forRoot(persistedReducer, {}),
+    StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,

@@ -13,6 +13,11 @@ const routes: Routes = [
       import('./pages/landing/landing.module').then((m) => m.LandingModule),
   },
   {
+    path: 'details',
+    loadChildren: () =>
+      import('./pages/details/details.module').then((m) => m.DetailsModule),
+  },
+  {
     path: '',
     redirectTo: '/landing',
     pathMatch: 'full',
